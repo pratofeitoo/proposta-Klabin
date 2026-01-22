@@ -1,0 +1,2126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programa Estruturante: Diversidade, Inclusão e Segurança | Klabin × DiverCidade</title>
+    <meta name="description"
+        content="Proposta técnica para estruturação de cultura, inclusão e segurança psicológica na Klabin.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* DiverCidade Brand Colors */
+            --divercidade-primary: #9358DF;
+            --divercidade-dark: #7B40C4;
+            --divercidade-orange: #FF9500;
+            --divercidade-turquesa: #00DDDB;
+            --divercidade-bg-light: #F8F9FA;
+            --divercidade-text: #1A1A1A;
+            --divercidade-text-muted: #4A4A4A;
+            --divercidade-border: #E0E0E0;
+            --bg-surface: #FFFFFF;
+
+            /* Compatibility Aliases */
+            --color-bg-primary: var(--bg-surface);
+            --color-bg-secondary: var(--divercidade-bg-light);
+            --color-text-primary: var(--divercidade-text);
+            --color-text-secondary: var(--divercidade-text-muted);
+            --color-border: var(--divercidade-border);
+
+
+            /* Spacing & Layout */
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 40px;
+            --spacing-xxl: 80px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+
+            /* Shadows */
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 16px 32px rgba(147, 88, 223, 0.15);
+        }
+
+        /* Dark Mode & Helpers */
+        body.dark-mode {
+            --divercidade-bg-light: #0D0D0D;
+            --divercidade-text: #F5F5F5;
+            --divercidade-text-muted: #C8C8C8;
+            --divercidade-border: #444444;
+            --bg-surface: #1A1A1A;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.5);
+            --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.6);
+            --shadow-lg: 0 16px 32px rgba(147, 88, 223, 0.2);
+
+            /* Compatibility Aliases for Dark Mode */
+            --color-bg-primary: #1A1A1A;
+            --color-bg-secondary: #0D0D0D;
+            --color-text-primary: #F5F5F5;
+            --color-text-secondary: #C8C8C8;
+            --color-border: #444444;
+        }
+
+        /* Enhanced Dark Mode Overrides */
+        body.dark-mode .timeline-wrapper::before {
+            background: var(--divercidade-border);
+        }
+
+        body.dark-mode .timeline-marker {
+            background: var(--bg-surface);
+            border-color: var(--divercidade-primary);
+        }
+
+        body.dark-mode td {
+            color: var(--divercidade-text);
+        }
+
+        body.dark-mode .obj-metric-label,
+        body.dark-mode .timeline-date,
+        body.dark-mode .phase-duration {
+            color: var(--divercidade-text-muted);
+        }
+
+        /* Calculator Dark Mode Overrides */
+        body.dark-mode .module-card {
+            background: var(--bg-surface);
+            border-color: var(--divercidade-border);
+        }
+
+        body.dark-mode .module-info h4 {
+            color: var(--divercidade-text);
+        }
+
+        body.dark-mode .module-info small {
+            color: var(--divercidade-text-muted);
+        }
+
+        body.dark-mode .module-btn {
+            background: #2D2D2D;
+            border-color: var(--divercidade-border);
+            color: var(--divercidade-text);
+        }
+
+        body.dark-mode .module-btn:hover {
+            background: var(--divercidade-primary);
+            color: white;
+        }
+
+        body.dark-mode .summary-card {
+            background: var(--bg-surface);
+            border-color: var(--divercidade-border);
+        }
+
+        body.dark-mode .summary-card h4 {
+            color: var(--divercidade-text);
+        }
+
+        body.dark-mode .btn {
+            background: var(--bg-surface);
+            color: var(--divercidade-text);
+            border: 1px solid var(--divercidade-border);
+        }
+
+        body.dark-mode .btn-primary {
+            background: var(--divercidade-primary);
+            color: white;
+            border-color: var(--divercidade-primary);
+        }
+
+        body.dark-mode .btn-primary:hover {
+            background: var(--divercidade-dark);
+        }
+
+        /* Base Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid var(--divercidade-border);
+            background: var(--bg-surface);
+            color: var(--divercidade-text);
+        }
+
+        .btn:hover {
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary {
+            background: var(--divercidade-primary);
+            color: white;
+            border-color: var(--divercidade-primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--divercidade-dark);
+            border-color: var(--divercidade-dark);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--divercidade-border);
+            color: var(--divercidade-text);
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--divercidade-primary);
+            color: white;
+            border-color: var(--divercidade-primary);
+            transform: rotate(15deg);
+        }
+
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--divercidade-text);
+            background-color: var(--divercidade-bg-light);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 1.2em;
+            color: var(--divercidade-text-muted);
+        }
+
+        strong {
+            color: var(--divercidade-text);
+            font-weight: 700;
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--bg-surface);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-logo img {
+            height: 35px;
+            width: auto;
+        }
+
+        .logo-dark {
+            display: none;
+        }
+
+        body.dark-mode .logo-light {
+            display: none;
+        }
+
+        body.dark-mode .logo-dark {
+            display: block;
+        }
+
+        .nav-logo-sep {
+            color: var(--divercidade-primary);
+            font-size: 18px;
+            font-weight: 300;
+            opacity: 0.6;
+        }
+
+        .nav-logo-client {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--divercidade-text);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--divercidade-text-muted);
+            font-weight: 500;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--divercidade-primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            padding: 140px 20px 120px;
+            background: linear-gradient(135deg, #2A1B3D 0%, #4A2B70 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=');
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 24px;
+        }
+
+        .hero-title {
+            font-size: 52px;
+            margin-bottom: 24px;
+            max-width: 850px;
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            opacity: 0.9;
+            max-width: 750px;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* Section Styling */
+        .section {
+            padding: var(--spacing-xxl) 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+            max-width: 900px;
+        }
+
+        .section-tag {
+            color: var(--divercidade-primary);
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 40px;
+            color: var(--divercidade-text);
+            margin-bottom: 20px;
+        }
+
+        .section-desc {
+            font-size: 18px;
+            color: var(--divercidade-text-muted);
+            line-height: 1.7;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-surface);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--divercidade-border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--divercidade-primary);
+        }
+
+        /* Context Grid */
+        .context-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .context-text p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, var(--divercidade-primary), var(--divercidade-dark));
+            color: white;
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .stat-number {
+            font-size: 52px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            opacity: 0.95;
+            line-height: 1.5;
+        }
+
+        /* Objectives Grid */
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+            gap: 30px;
+        }
+
+        .obj-card {
+            background: var(--bg-surface);
+            padding: 36px;
+            border-radius: var(--radius-lg);
+            border-top: 5px solid var(--divercidade-primary);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .obj-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .obj-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(147, 88, 223, 0.1);
+            color: var(--divercidade-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 24px;
+        }
+
+        .obj-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--divercidade-text);
+        }
+
+        .obj-description {
+            font-size: 15px;
+            color: var(--divercidade-text-muted);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .obj-metric {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--divercidade-border);
+        }
+
+        .obj-metric-val {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--divercidade-primary);
+        }
+
+        .obj-metric-label {
+            font-size: 13px;
+            text-transform: uppercase;
+            color: var(--divercidade-text-muted);
+        }
+
+        /* Principles Grid */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .principle-card {
+            background: var(--bg-surface);
+            padding: 28px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--divercidade-border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .principle-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--divercidade-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .principle-text {
+            font-size: 15px;
+            color: var(--divercidade-text-muted);
+            line-height: 1.6;
+        }
+
+        /* Pillars & Strategy */
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .pillar-section {
+            background: var(--bg-surface);
+            padding: 36px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .pillar-header {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--divercidade-text);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .pillar-header i {
+            color: var(--divercidade-primary);
+            font-size: 28px;
+        }
+
+        .pillar-description {
+            font-size: 15px;
+            color: var(--divercidade-text-muted);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 15px;
+            color: var(--divercidade-text-muted);
+            line-height: 1.5;
+        }
+
+        .feature-list i {
+            color: var(--divercidade-turquesa);
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+
+        /* Implementation Phases */
+        .phases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .phase-card {
+            background: var(--bg-surface);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--divercidade-border);
+        }
+
+        .phase-header {
+            background: linear-gradient(135deg, var(--divercidade-primary), var(--divercidade-dark));
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .phase-number {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .phase-title {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .phase-body {
+            padding: 30px;
+        }
+
+        .phase-duration {
+            background: rgba(147, 88, 223, 0.1);
+            color: var(--divercidade-primary);
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .phase-text {
+            font-size: 15px;
+            color: var(--divercidade-text-muted);
+            line-height: 1.6;
+        }
+
+        .phase-points {
+            list-style: none;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--divercidade-border);
+        }
+
+        .phase-points li {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: var(--divercidade-text-muted);
+        }
+
+        .phase-points i {
+            color: var(--divercidade-turquesa);
+            flex-shrink: 0;
+        }
+
+        /* Timeline (Detailed) */
+        .timeline-wrapper {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-wrapper::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--divercidade-border);
+        }
+
+        .timeline-row {
+            display: flex;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .timeline-marker {
+            width: 50px;
+            height: 50px;
+            background: var(--bg-surface);
+            border: 2px solid var(--divercidade-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--divercidade-primary);
+            z-index: 2;
+            flex-shrink: 0;
+        }
+
+        .timeline-content {
+            margin-left: 30px;
+            background: var(--bg-surface);
+            padding: 24px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            flex-grow: 1;
+            border-left: 4px solid var(--divercidade-primary);
+        }
+
+        .timeline-date {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--divercidade-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .timeline-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--divercidade-text);
+            margin-bottom: 8px;
+        }
+
+        .timeline-desc {
+            font-size: 14px;
+            color: var(--divercidade-text-muted);
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .metric-card {
+            background: var(--bg-surface);
+            padding: 28px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--divercidade-border);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+        }
+
+        .metric-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 16px;
+            background: rgba(147, 88, 223, 0.1);
+            color: var(--divercidade-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--divercidade-text);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .metric-desc {
+            font-size: 14px;
+            color: var(--divercidade-text-muted);
+        }
+
+        /* Tables (RACI & Deliverables) */
+        .table-responsive {
+            overflow-x: auto;
+            background: var(--bg-surface);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            margin-top: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th {
+            background: var(--divercidade-primary);
+            color: white;
+            text-align: left;
+            padding: 18px 16px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 16px;
+            border-bottom: 1px solid var(--divercidade-border);
+            font-size: 14px;
+            color: var(--divercidade-text-muted);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .badge {
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge-high {
+            background: rgba(234, 67, 53, 0.1);
+            color: #EA4335;
+        }
+
+        .badge-med {
+            background: rgba(255, 149, 0, 0.1);
+            color: #FF9500;
+        }
+
+        /* Assumptions Section */
+        .assumptions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .assumption-card {
+            background: var(--bg-surface);
+            padding: 28px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--divercidade-orange);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .assumption-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--divercidade-text);
+            margin-bottom: 12px;
+        }
+
+        .assumption-text {
+            font-size: 14px;
+            color: var(--divercidade-text-muted);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--divercidade-bg-light);
+            color: var(--divercidade-text);
+            padding: 60px 20px 30px;
+            margin-top: 80px;
+            border-top: 1px solid var(--divercidade-border);
+        }
+
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+            padding-bottom: 50px;
+            border-bottom: 1px solid var(--divercidade-border);
+        }
+
+        .footer-about h3 {
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+
+        .footer-about p {
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        .footer-links h3 {
+            margin-bottom: 16px;
+            font-size: 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-link {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .footer-link:hover {
+            opacity: 0.7;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            opacity: 0.5;
+            font-size: 12px;
+        }
+
+        .footer-contact {
+            text-align: center;
+            margin-top: 20px;
+            opacity: 0.8;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .footer-contact div {
+            margin-bottom: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .context-grid,
+            .strategy-grid,
+            .footer-main {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-menu {
+                gap: 15px;
+            }
+
+            .stat-box {
+                padding: 30px;
+            }
+
+            .stat-number {
+                font-size: 40px;
+            }
+
+            .hero {
+                padding: 100px 20px 80px;
+            }
+
+            .section {
+                padding: 60px 20px;
+            }
+        }
+
+        /* Calculator Styles */
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 32px;
+        }
+
+        .calculator-main {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .calculator-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .module-card {
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .module-card:hover {
+            box-shadow: var(--shadow-sm);
+            border-color: var(--divercidade-primary);
+        }
+
+        .module-info h4 {
+            margin: 0 0 4px 0;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .module-info small {
+            display: block;
+            font-size: 13px;
+        }
+
+        .module-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .module-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            border: 1px solid var(--color-border);
+            background: var(--color-bg-secondary);
+            color: var(--color-text-primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .module-btn:hover {
+            background: var(--divercidade-primary);
+            color: white;
+            border-color: var(--divercidade-primary);
+        }
+
+        .module-count {
+            min-width: 40px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--divercidade-primary);
+        }
+
+        .summary-card {
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-total {
+            background: linear-gradient(135deg, #9358DF 0%, #FF6B35 100%);
+            color: white;
+            padding: 28px 24px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .total-value {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-card {
+                position: static;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <img src="../../System/01_SISTEMA_HUB/hub%20id%20canva/Logo%20DiverCidade%20Business%20Hub%20-%20Logo%20Colorida%20%2B%20Letra%20Preta.png"
+                    alt="DiverCidade Logo" class="logo-light">
+                <img src="../../System/01_SISTEMA_HUB/hub%20id%20canva/Logo%20DiverCidade%20Business%20Hub%20-%20Logo%20Colorida%20Letra%20Branca.png"
+                    alt="DiverCidade Logo" class="logo-dark">
+                <span class="nav-logo-sep">|</span>
+                <span class="nav-logo-client">Klabin</span>
+            </a>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <ul class="nav-menu">
+                    <li><a href="#contexto" class="nav-link">Contexto</a></li>
+                    <li><a href="#objetivos" class="nav-link">Objetivos</a></li>
+                    <li><a href="#estrategia" class="nav-link">Estratégia</a></li>
+                    <li><a href="#implementacao" class="nav-link">Implementação</a></li>
+                    <li><a href="#indicadores" class="nav-link">Indicadores</a></li>
+                </ul>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Programa Estruturante</div>
+            <h1 class="hero-title">Diversidade, Inclusão, Segurança e Cultura</h1>
+            <p class="hero-subtitle">Uma proposta estruturante para transformar a Klabin em uma organização onde
+                diversidade e inclusão são pilares estratégicos, geradores de segurança psicológica e produtividade
+                sustentável.</p>
+        </div>
+    </section>
+
+    <!-- Context Section -->
+    <section class="section" id="contexto">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Contexto</span>
+                <h2 class="section-title">O Desafio Estratégico da Klabin</h2>
+            </div>
+
+            <div class="context-grid">
+                <div class="context-text">
+                    <p>A Klabin, uma das maiores empresas do setor de papel e celulose no Brasil, enfrenta um desafio
+                        único e estratégico: implementar uma agenda de <strong>diversidade, inclusão e segurança
+                            psicológica coerente em nível nacional</strong>, atendendo simultaneamente às necessidades
+                        específicas de cada localidade.</p>
+
+                    <p>Com <strong>aproximadamente 18 mil colaboradores</strong> distribuídos em plantas industriais e
+                        unidades administrativas em diversas regiões do país, a organização possui um recurso
+                        estratégico valioso: <strong>squads ativos</strong> que podem ser potencializados como
+                        ferramentas práticas para promover cultura, inclusão e segurança em toda a organização.</p>
+
+                    <p>Esta proposta não busca criar novas estruturas burocráticas, mas sim <strong>potencializar o que
+                            já existe</strong>, transformando os squads existentes em motores de mudança cultural
+                        capazes de sustentar a inclusão no longo prazo.</p>
+                </div>
+
+                <div>
+                    <div class="stat-box">
+                        <div class="stat-number">~18 mil</div>
+                        <div class="stat-label">Colaboradores distribuídos em plantas industriais</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">Múltiplas</div>
+                        <div class="stat-label">Regiões geográficas com realidades distintas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategic Objectives Section -->
+    <section class="section" style="background: var(--bg-surface);" id="objetivos">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Metas Estratégicas</span>
+                <h2 class="section-title">Objetivos Estratégicos Alinhados</h2>
+                <p class="section-desc">Esta proposta está conectada diretamente com as metas estabelecidas pela Klabin,
+                    transformando-as em ações operacionais concretas.</p>
+            </div>
+
+            <div class="objectives-grid">
+                <!-- Objective 1: PcDs -->
+                <div class="obj-card">
+                    <div class="obj-icon"><i class="fas fa-users"></i></div>
+                    <h3 class="obj-title">Inclusão de Pessoas com Deficiência</h3>
+                    <p class="obj-description">Aumentar de forma contínua e sustentável o percentual de colaboradores
+                        com deficiência, promovendo um ambiente de trabalho acessível, seguro e verdadeiramente
+                        inclusivo em todas as plantas da Klabin.</p>
+                    <div class="obj-metric">
+                        <span class="obj-metric-label">Base atual:</span>
+                        <span class="obj-metric-val">3,3–3,5%</span>
+                    </div>
+                </div>
+
+                <!-- Objective 2: Women Leadership -->
+                <div class="obj-card">
+                    <div class="obj-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="obj-title">Mulheres em Cargos de Liderança</h3>
+                    <p class="obj-description">Alcançar representação equilibrada em posições de liderança através de
+                        oportunidades de desenvolvimento e capacitação para mulheres em todos os níveis hierárquicos.
+                    </p>
+                    <div class="obj-metric">
+                        <span class="obj-metric-val">30%</span>
+                        <span class="obj-metric-label">Meta até 2030</span>
+                    </div>
+                </div>
+
+                <!-- Objective 3: Workplace Climate -->
+                <div class="obj-card">
+                    <div class="obj-icon"><i class="fas fa-heart"></i></div>
+                    <h3 class="obj-title">Clima Organizacional Inclusivo</h3>
+                    <p class="obj-description">Melhorar significativamente o clima organizacional, criando um ambiente
+                        seguro, respeitoso e acolhedor onde todos se sentem pertencentes.</p>
+                    <div class="obj-metric">
+                        <span class="obj-metric-val">90%</span>
+                        <span class="obj-metric-label">Aprovação esperada (base: 78% em 2024)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Principles Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Fundamentos</span>
+                <h2 class="section-title">Princípios Norteadores</h2>
+                <p class="section-desc">A proposta é fundamentada em cinco princípios que conectam diversidade a
+                    segurança, respeito e produtividade:</p>
+            </div>
+
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-number">1</div>
+                    <p class="principle-text"><strong>Aproveitamento dos Squads Existentes</strong> como ferramentas
+                        estratégicas para promover inclusão e segurança operacional.</p>
+                </div>
+
+                <div class="principle-card">
+                    <div class="principle-number">2</div>
+                    <p class="principle-text"><strong>Escalabilidade Nacional</strong> com ações locais adaptadas às
+                        realidades específicas de cada planta e região.</p>
+                </div>
+
+                <div class="principle-card">
+                    <div class="principle-number">3</div>
+                    <p class="principle-text"><strong>Linguagem Acessível</strong>, particularmente para o público
+                        operacional, garantindo compreensão e engajamento.</p>
+                </div>
+
+                <div class="principle-card">
+                    <div class="principle-number">4</div>
+                    <p class="principle-text"><strong>Integração com Áreas-Chave</strong>: Medicina do Trabalho,
+                        Segurança do Trabalho e Gente & Gestão para alinhamento operacional.</p>
+                </div>
+
+                <div class="principle-card">
+                    <div class="principle-number">5</div>
+                    <p class="principle-text"><strong>Indicadores Claros</strong> e acompanhamento contínuo, garantindo
+                        transparência e mensuração rigorosa de resultados.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategy Section -->
+    <section class="section" style="background: var(--bg-surface);" id="estrategia">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Estrutura Estratégica</span>
+                <h2 class="section-title">Dois Pilares Estruturantes</h2>
+                <p class="section-desc">A estratégia é construída sobre dois pilares complementares que garantem
+                    coerência nacional e impacto operacional local.</p>
+            </div>
+
+            <div class="strategy-grid">
+                <!-- Pilar 1 -->
+                <div class="pillar-section">
+                    <div class="pillar-header">
+                        <i class="fas fa-compass"></i>
+                        Pilar 1: Direcionamento Nacional e Governança
+                    </div>
+                    <p class="pillar-description">Garante que a agenda de diversidade seja coerente e alinhada em todas
+                        as plantas da Klabin:</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Alinhamento estratégico com Gente & Gestão</li>
+                        <li><i class="fas fa-check"></i> Conexão direta com metas de inclusão de PcDs</li>
+                        <li><i class="fas fa-check"></i> Diretrizes nacionais com flexibilidade regional</li>
+                        <li><i class="fas fa-check"></i> Estrutura robusta de indicadores e monitoramento</li>
+                    </ul>
+                </div>
+
+                <!-- Pilar 2 -->
+                <div class="pillar-section">
+                    <div class="pillar-header">
+                        <i class="fas fa-users-cog"></i>
+                        Pilar 2: Liderança como Vetor de Sustentação
+                    </div>
+                    <p class="pillar-description">Capacita líderes a traduzirem diversidade em prática operacional:</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Capacitação para práticas inclusivas no contexto industrial
+                        </li>
+                        <li><i class="fas fa-check"></i> Gestão de equipes diversas com foco em segurança</li>
+                        <li><i class="fas fa-check"></i> Habilidades de comunicação e feedback sem vieses</li>
+                        <li><i class="fas fa-check"></i> Responsabilidade na criação de pertencimento</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Squads Role Section -->
+            <div
+                style="margin-top: 60px; background: var(--divercidade-bg-light); padding: 40px; border-radius: 16px; border-left: 4px solid var(--divercidade-turquesa);">
+                <h3 style="font-size: 22px; margin-bottom: 20px; color: var(--divercidade-text);">Squads como
+                    Ferramentas de Ação</h3>
+                <p style="margin-bottom: 20px; color: var(--divercidade-text-muted); line-height: 1.7;">Os squads
+                    existentes na Klabin serão reposicionados como <strong>estruturas práticas</strong> que sustentam a
+                    cultura inclusiva. Não são grupos de afinidade, mas estruturas de ação com missões claras,
+                    entregáveis definidos e conexão direta com a estratégia corporativa:</p>
+                <ul
+                    style="list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <li style="display: flex; gap: 12px;"><i class="fas fa-check"
+                            style="color: var(--divercidade-turquesa); margin-top: 4px; flex-shrink: 0;"></i>
+                        <span>Apoiar metas estratégicas de diversidade</span>
+                    </li>
+                    <li style="display: flex; gap: 12px;"><i class="fas fa-check"
+                            style="color: var(--divercidade-turquesa); margin-top: 4px; flex-shrink: 0;"></i>
+                        <span>Conectar operação, liderança e áreas técnicas</span>
+                    </li>
+                    <li style="display: flex; gap: 12px;"><i class="fas fa-check"
+                            style="color: var(--divercidade-turquesa); margin-top: 4px; flex-shrink: 0;"></i>
+                        <span>Gerar dados e devolutivas para melhoria contínua</span>
+                    </li>
+                    <li style="display: flex; gap: 12px;"><i class="fas fa-check"
+                            style="color: var(--divercidade-turquesa); margin-top: 4px; flex-shrink: 0;"></i>
+                        <span>Sustentar a cultura de inclusão no longo prazo</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementation Phases -->
+    <section class="section" id="implementacao">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Roadmap</span>
+                <h2 class="section-title">Fases de Implementação</h2>
+                <p class="section-desc">O programa será desenvolvido em três fases estratégicas, permitindo aprendizado
+                    contínuo e adaptação baseada em dados.</p>
+            </div>
+
+            <div class="phases-grid">
+                <!-- Phase 1 -->
+                <div class="phase-card">
+                    <div class="phase-header">
+                        <div class="phase-number">01</div>
+                        <div class="phase-title">Piloto Estruturado</div>
+                    </div>
+                    <div class="phase-body">
+                        <div class="phase-duration"><i class="fas fa-calendar"></i> 0–3 meses</div>
+                        <p class="phase-text">Seleção de plantas estratégicas para iniciar o projeto com alinhamento de
+                            lideranças locais e atuação orientada de squads, permitindo ajustes metodológicos.</p>
+                        <ul class="phase-points">
+                            <li><i class="fas fa-arrow-right"></i> Kickoff e mobilização</li>
+                            <li><i class="fas fa-arrow-right"></i> Diagnóstico operacional</li>
+                            <li><i class="fas fa-arrow-right"></i> Execução piloto estruturada</li>
+                            <li><i class="fas fa-arrow-right"></i> Coleta de aprendizados</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="phase-card">
+                    <div class="phase-header">
+                        <div class="phase-number">02</div>
+                        <div class="phase-title">Expansão Regional</div>
+                    </div>
+                    <div class="phase-body">
+                        <div class="phase-duration"><i class="fas fa-calendar"></i> 4–8 meses</div>
+                        <p class="phase-text">Ampliação para novas plantas com base nos aprendizados do piloto.
+                            Padronização flexível com adaptações locais e compartilhamento de boas práticas.</p>
+                        <ul class="phase-points">
+                            <li><i class="fas fa-arrow-right"></i> Ajustes metodológicos</li>
+                            <li><i class="fas fa-arrow-right"></i> Rollout em novas unidades</li>
+                            <li><i class="fas fa-arrow-right"></i> Compartilhamento de práticas</li>
+                            <li><i class="fas fa-arrow-right"></i> Monitoramento de indicadores</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="phase-card">
+                    <div class="phase-header">
+                        <div class="phase-number">03</div>
+                        <div class="phase-title">Consolidação Nacional</div>
+                    </div>
+                    <div class="phase-body">
+                        <div class="phase-duration"><i class="fas fa-calendar"></i> 9–12+ meses</div>
+                        <p class="phase-text">Consolidação em todas as plantas. Monitoramento contínuo dos indicadores
+                            garante sustentação da cultura de diversidade e inclusão.</p>
+                        <ul class="phase-points">
+                            <li><i class="fas fa-arrow-right"></i> Cobertura nacional completa</li>
+                            <li><i class="fas fa-arrow-right"></i> Governança e sustentação</li>
+                            <li><i class="fas fa-arrow-right"></i> Acompanhamento de resultados</li>
+                            <li><i class="fas fa-arrow-right"></i> Plano de continuidade</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline Detail -->
+            <div style="margin-top: 60px;">
+                <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 30px; color: var(--divercidade-text);">
+                    Marcos Principais do Cronograma</h3>
+                <div class="timeline-wrapper">
+                    <div class="timeline-row">
+                        <div class="timeline-marker">1</div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Mês 0</div>
+                            <div class="timeline-title">Assinatura e Mobilização</div>
+                            <div class="timeline-desc">Kickoff do projeto, alinhamento de stakeholders e mobilização das
+                                plantas piloto.</div>
+                        </div>
+                    </div>
+                    <div class="timeline-row">
+                        <div class="timeline-marker">2</div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Mês 1–2</div>
+                            <div class="timeline-title">Diagnóstico e Capacitação</div>
+                            <div class="timeline-desc">Coleta de dados de baseline, diagnóstico de clima e capacitação
+                                de lideranças nas plantas piloto.</div>
+                        </div>
+                    </div>
+                    <div class="timeline-row">
+                        <div class="timeline-marker">3</div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Mês 3</div>
+                            <div class="timeline-title">Entrega do Piloto</div>
+                            <div class="timeline-desc">Relatório técnico de piloto, análise de resultados preliminares e
+                                recomendações para expansão.</div>
+                        </div>
+                    </div>
+                    <div class="timeline-row">
+                        <div class="timeline-marker">4</div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Mês 4–8</div>
+                            <div class="timeline-title">Expansão Regional</div>
+                            <div class="timeline-desc">Rollout em novas plantas, facilitação e coleta de dados em fase
+                                de expansão.</div>
+                        </div>
+                    </div>
+                    <div class="timeline-row">
+                        <div class="timeline-marker">5</div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Mês 9–12+</div>
+                            <div class="timeline-title">Consolidação e Resultado Final</div>
+                            <div class="timeline-desc">Consolidação em todas as plantas, dashboard de indicadores ativo,
+                                e plano de sustentação aprovado.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Metrics Section -->
+    <section class="section" style="background: var(--bg-surface);" id="indicadores">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Mensuração</span>
+                <h2 class="section-title">Indicadores de Sucesso</h2>
+                <p class="section-desc">O sucesso será medido através de indicadores claros e monitoramento contínuo,
+                    garantindo transparência e accountability em todo o programa.</p>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon"><i class="fas fa-users"></i></div>
+                    <div class="metric-label">Representação de PcDs</div>
+                    <div class="metric-desc">Aumento contínuo do percentual de pessoas com deficiência na força de
+                        trabalho Klabin.</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-icon"><i class="fas fa-user-tie"></i></div>
+                    <div class="metric-label">Mulheres na Liderança</div>
+                    <div class="metric-desc">Crescimento no número e percentual de mulheres em cargos de liderança em
+                        todos os níveis.</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-icon"><i class="fas fa-chart-bar"></i></div>
+                    <div class="metric-label">Índice de Clima</div>
+                    <div class="metric-desc">Melhoria no índice de aprovação de colaboradores em grupos de diversidade
+                        (meta: 90%).</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-icon"><i class="fas fa-building"></i></div>
+                    <div class="metric-label">Engajamento Operacional</div>
+                    <div class="metric-desc">Participação das plantas industriais nas iniciativas de diversidade e
+                        inclusão.</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-icon"><i class="fas fa-sync-alt"></i></div>
+                    <div class="metric-label">Sustentação Contínua</div>
+                    <div class="metric-desc">Manutenção e evolução da cultura inclusiva após conclusão do programa.
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="metric-label">Segurança Psicológica</div>
+                    <div class="metric-desc">Percepção de segurança psicológica entre colaboradores, medida por pesquisa
+                        específica.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deliverables Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Entregáveis</span>
+                <h2 class="section-title">Produtos e Critérios de Aceitação</h2>
+                <p class="section-desc">Cada entregável está definido com formato específico e critérios de aceitação
+                    claros, garantindo qualidade e alinhamento com expectativas.</p>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Entregável</th>
+                            <th>Formato</th>
+                            <th>Critério de Aceitação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Relatório Técnico Final</strong></td>
+                            <td>PDF</td>
+                            <td>Documento revisado pelo cliente e aprovado em até 1 rodada de comentários</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Instrumento de Pesquisa</strong></td>
+                            <td>DOCX/XLSX</td>
+                            <td>Instrumento testado em piloto e validado pelo cliente</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Workshops de Capacitação</strong></td>
+                            <td>Presencial</td>
+                            <td>Sessão entregue com lista de presença e material compartilhado</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Painel de Indicadores</strong></td>
+                            <td>Dashboard Digital</td>
+                            <td>Dashboard disponível com métricas definidas e dados de baseline</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Plano de Ação Regional</strong></td>
+                            <td>Documento</td>
+                            <td>Plano customizado e aprovado para cada planta piloto</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Assumptions Section -->
+    <section class="section" style="background: var(--bg-surface);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Dependências</span>
+                <h2 class="section-title">Pressupostos e Responsabilidades</h2>
+                <p class="section-desc">O sucesso da proposta depende de algumas pressuposições críticas que devem ser
+                    confirmadas com a Klabin.</p>
+            </div>
+
+            <div class="assumptions-grid">
+                <div class="assumption-card">
+                    <div class="assumption-title"><i class="fas fa-database" style="margin-right: 10px;"></i>Dados e
+                        Acesso</div>
+                    <div class="assumption-text">A Klabin fornecerá acesso aos dados RH necessários para mensuração
+                        (definição de liderança, total de colaboradores por planta, base de PcDs).</div>
+                </div>
+
+                <div class="assumption-card">
+                    <div class="assumption-title"><i class="fas fa-handshake"
+                            style="margin-right: 10px;"></i>Engajamento da Liderança</div>
+                    <div class="assumption-text">Lideranças locais dispostas a participar de rituais, workshops e
+                        aplicar as ações recomendadas nas suas respectivas plantas.</div>
+                </div>
+
+                <div class="assumption-card">
+                    <div class="assumption-title"><i class="fas fa-tasks" style="margin-right: 10px;"></i>Squads com
+                        Mandato</div>
+                    <div class="assumption-text">Squads existentes possuem mandato claro, capacidade operacional e
+                        autoridade para executar ações locais recomendadas.</div>
+                </div>
+
+                <div class="assumption-card">
+                    <div class="assumption-title"><i class="fas fa-coins" style="margin-right: 10px;"></i>Orçamento
+                        Alocado</div>
+                    <div class="assumption-text">Orçamento para piloto e expansão será alocado conforme proposta
+                        detalhada, com pagamento conforme marcos estabelecidos.</div>
+                </div>
+
+                <div class="assumption-card">
+                    <div class="assumption-title"><i class="fas fa-lock" style="margin-right: 10px;"></i>LGPD e
+                        Privacidade</div>
+                    <div class="assumption-text">Qualquer coleta de dados com pessoas será anônima e conduzida com
+                        controles LGPD, conforme legislação brasileira.</div>
+                </div>
+
+                <div class="assumption-card">
+                    <div class="assumption-title"><i class="fas fa-location-pin"
+                            style="margin-right: 10px;"></i>Ambiente Operacional</div>
+                    <div class="assumption-text">Ambientes adequados nas plantas para realização de workshops, pesquisas
+                        e atividades do programa.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Budget Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Investimento</span>
+                <h2 class="section-title">Estimativa de Orçamento</h2>
+                <p class="section-desc">Investimento estruturado em fases, com contingência para garantir qualidade e
+                    flexibilidade operacional.</p>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Valor (R$)</th>
+                            <th>Comentários</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Planejamento e Diagnóstico (Piloto)</strong></td>
+                            <td>R$ 100.000,00</td>
+                            <td>Inclui mobilização local, diagnóstico de baseline</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Execução Piloto (por planta)</strong></td>
+                            <td>R$ 45.000,00</td>
+                            <td>Workshops, facilitação presencial, coleta de dados</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Consolidação e Relatórios</strong></td>
+                            <td>R$ 75.000,00</td>
+                            <td>Entregáveis finais, análise, dashboard, apresentação</td>
+                        </tr>
+                        <tr style="background: rgba(147, 88, 223, 0.1);">
+                            <td><strong>Subtotal</strong></td>
+                            <td><strong>R$ 220.000,00</strong></td>
+                            <td>Valor base para piloto e consolidação</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Contingência (10%)</strong></td>
+                            <td>R$ 22.000,00</td>
+                            <td>Buffer recomendado (5–15%) para ajustes</td>
+                        </tr>
+                        <tr style="background: rgba(147, 88, 223, 0.2); font-weight: 700;">
+                            <td><strong>TOTAL ESTIMADO</strong></td>
+                            <td><strong>R$ 242.000,00</strong></td>
+                            <td>Sujeito a negociação conforme escopo final</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin-top: 30px; background: var(--bg-surface); padding: 30px; border-radius: 16px;">
+                <h3 style="font-size: 18px; margin-bottom: 16px; color: var(--divercidade-text);">Modelo de Pagamento
+                </h3>
+                <ul
+                    style="list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                    <li style="display: flex; gap: 12px;">
+                        <div
+                            style="width: 50px; height: 50px; background: var(--divercidade-primary); color: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">
+                            30%</div>
+                        <div><strong style="color: var(--divercidade-text);">Mobilização</strong><br><span
+                                style="font-size: 14px; color: var(--divercidade-text-muted);">Na assinatura do
+                                contrato</span></div>
+                    </li>
+                    <li style="display: flex; gap: 12px;">
+                        <div
+                            style="width: 50px; height: 50px; background: var(--divercidade-primary); color: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">
+                            40%</div>
+                        <div><strong style="color: var(--divercidade-text);">Piloto</strong><br><span
+                                style="font-size: 14px; color: var(--divercidade-text-muted);">Na entrega e aprovação do
+                                piloto</span></div>
+                    </li>
+                    <li style="display: flex; gap: 12px;">
+                        <div
+                            style="width: 50px; height: 50px; background: var(--divercidade-primary); color: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">
+                            30%</div>
+                        <div><strong style="color: var(--divercidade-text);">Finalização</strong><br><span
+                                style="font-size: 14px; color: var(--divercidade-text-muted);">Na entrega final e aceite
+                                do relatório</span></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Investment Calculator Section -->
+    <section class="section" id="calculadora" style="background: var(--bg-surface);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Investimento</span>
+                <h2 class="section-title">Calculadora de Investimento</h2>
+                <p class="section-subtitle">Personalize a proposta selecionando módulos e ajustando quantidades para seu
+                    cenário ideal</p>
+            </div>
+
+            <div class="calculator-grid">
+                <div class="calculator-main">
+                    <!-- Fixed Blocks (Pillars) -->
+                    <div class="card" style="margin-bottom: 24px;">
+                        <h3 style="margin-bottom: 16px; color: var(--divercidade-primary);"><i class="fas fa-lock"></i>
+                            Blocos Base (Fixos)</h3>
+
+                        <div class="module-card" style="border-left: 4px solid var(--divercidade-primary);">
+                            <div class="module-info">
+                                <h4>Pilar 1: Pessoas com Deficiência</h4>
+                                <small style="color: var(--color-text-secondary);">Programa estruturado +
+                                    mentoria</small>
+                            </div>
+                            <div style="font-weight: 700;">R$ 73.000</div>
+                        </div>
+
+                        <div class="module-card" style="border-left: 4px solid var(--divercidade-primary);">
+                            <div class="module-info">
+                                <h4>Pilar 2: Mulheres em Liderança</h4>
+                                <small style="color: var(--color-text-secondary);">Formação + governança</small>
+                            </div>
+                            <div style="font-weight: 700;">R$ 74.000</div>
+                        </div>
+
+                        <div class="module-card" style="border-left: 4px solid var(--divercidade-primary);">
+                            <div class="module-info">
+                                <h4>Pilar 3: Segurança Psicológica & Clima</h4>
+                                <small style="color: var(--color-text-secondary);">Diagnóstico + mudança</small>
+                            </div>
+                            <div style="font-weight: 700;">R$ 73.000</div>
+                        </div>
+                    </div>
+
+                    <!-- Variable Modules -->
+                    <div class="card">
+                        <h3 style="margin-bottom: 16px; color: var(--divercidade-orange);"><i
+                                class="fas fa-sliders-h"></i> Módulos Variáveis</h3>
+
+                        <!-- Training Module -->
+                        <div class="module-card" data-module="training">
+                            <div class="module-info">
+                                <h4>Treinamentos Adicionais (Unidade)</h4>
+                                <small>R$ 15.000 / workshop (8h)</small>
+                            </div>
+                            <div class="module-controls">
+                                <button class="module-btn minus">-</button>
+                                <span class="module-count">0</span>
+                                <button class="module-btn plus">+</button>
+                            </div>
+                        </div>
+
+                        <!-- Women Leadership -->
+                        <div class="module-card" data-module="women">
+                            <div class="module-info">
+                                <h4>Mentoria Mulheres (Horas)</h4>
+                                <small>R$ 800 / hora (min. 20h rec.)</small>
+                            </div>
+                            <div class="module-controls">
+                                <button class="module-btn minus" data-step="5">-</button>
+                                <span class="module-count">0</span>
+                                <button class="module-btn plus" data-step="5">+</button>
+                            </div>
+                        </div>
+
+                        <!-- PcD Coaching -->
+                        <div class="module-card" data-module="pcd">
+                            <div class="module-info">
+                                <h4>Coaching PcD (Horas)</h4>
+                                <small>R$ 750 / hora (rec. 20h)</small>
+                            </div>
+                            <div class="module-controls">
+                                <button class="module-btn minus" data-step="5">-</button>
+                                <span class="module-count">0</span>
+                                <button class="module-btn plus" data-step="5">+</button>
+                            </div>
+                        </div>
+
+                        <!-- Climate Workshops -->
+                        <div class="module-card" data-module="climate">
+                            <div class="module-info">
+                                <h4>Workshops Clima (Unidade)</h4>
+                                <small>R$ 12.000 / workshop (4h)</small>
+                            </div>
+                            <div class="module-controls">
+                                <button class="module-btn minus">-</button>
+                                <span class="module-count">0</span>
+                                <button class="module-btn plus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary Sidebar -->
+                <div class="calculator-sidebar">
+                    <div class="card summary-card">
+                        <h4 style="margin-bottom: 16px;"><i class="fas fa-chart-pie"></i> Resumo Financeiro</h4>
+
+                        <div
+                            style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px;">
+                            <span>Blocos Base</span>
+                            <strong>R$ 220.000</strong>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; margin-bottom: 16px; font-size: 14px; border-bottom: 1px solid var(--color-border); padding-bottom: 16px;">
+                            <span>Módulos Variáveis</span>
+                            <strong id="variable-display">R$ 0</strong>
+                        </div>
+
+                        <div class="summary-total">
+                            <div style="font-size: 13px; font-weight: 600; opacity: 0.95; letter-spacing: 0.5px;">
+                                INVESTIMENTO TOTAL</div>
+                            <span class="total-value" id="grand-total">R$ 220.000</span>
+                        </div>
+
+                        <!-- Payment Terms Breakdown -->
+                        <div
+                            style="background: var(--color-bg-secondary); padding: 12px; border-radius: 8px; margin-bottom: 16px;">
+                            <div style="font-size: 12px; font-weight: 700; margin-bottom: 8px;">Fluxo de Pagamento
+                                (Estimado)</div>
+                            <div
+                                style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;">
+                                <span>30% Mobilização</span>
+                                <span id="pay-signal">R$ 66.000</span>
+                            </div>
+                            <div
+                                style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;">
+                                <span>40% Piloto</span>
+                                <span id="pay-mid">R$ 88.000</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 13px;">
+                                <span>30% Finalização</span>
+                                <span id="pay-end">R$ 66.000</span>
+                            </div>
+                        </div>
+
+                        <div
+                            style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 16px; text-align: center;">
+                            *Valores sujeitos a negociação. Contingência (10%) não inclusa.
+                        </div>
+
+                        <button class="btn btn-primary" style="width: 100%;" onclick="window.print()">
+                            <i class="fas fa-file-pdf"></i> Salvar Proposta
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section"
+        style="background: linear-gradient(135deg, #2A1B3D 0%, #4A2B70 100%); color: white; text-align: center;">
+        <div class="container">
+            <h2 style="font-size: 36px; margin-bottom: 24px;">Pronto para Transformar a Klabin?</h2>
+            <p style="font-size: 18px; max-width: 700px; margin: 0 auto 36px; opacity: 0.95; line-height: 1.6;">Esta
+                proposta oferece um caminho claro e estruturado para transformar a Klabin em uma organização onde
+                diversidade, inclusão e segurança psicológica são pilares estratégicos geradores de produtividade
+                sustentável.</p>
+            <p style="font-size: 16px; opacity: 0.85;">Entre em contato com a DiverCidade para próximos passos e
+                validação de detalhes operacionais.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+        style="background: var(--divercidade-bg-light); padding: 60px 20px 40px; border-top: 1px solid var(--divercidade-border);">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 50px; margin-bottom: 50px;">
+                <!-- Brand Section -->
+                <div>
+                    <div style="margin-bottom: 20px;">
+                        <img src="../../System/01_SISTEMA_HUB/hub%20id%20canva/Logo%20DiverCidade%20Business%20Hub%20-%20Logo%20Colorida%20%2B%20Letra%20Preta.png"
+                            alt="DiverCidade Logo" class="logo-light" style="height: 40px;">
+                        <img src="../../System/01_SISTEMA_HUB/hub%20id%20canva/Logo%20DiverCidade%20Business%20Hub%20-%20Logo%20Colorida%20Letra%20Branca.png"
+                            alt="DiverCidade Logo" class="logo-dark" style="height: 40px;">
+                    </div>
+                    <p
+                        style="font-size: 14px; color: var(--divercidade-text-muted); line-height: 1.6; margin-bottom: 16px;">
+                        Transformando desenvolvimento de pessoas em sistemas sustentáveis de diversidade, equidade e
+                        inclusão.</p>
+                    <p style="font-size: 13px; color: var(--divercidade-text-muted);"><strong>Contato Geral:</strong>
+                        contato@divercidade.net</p>
+                </div>
+
+                <!-- Direct Contacts -->
+                <div>
+                    <h4
+                        style="font-size: 14px; font-weight: 700; color: var(--divercidade-text); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px;">
+                        Contatos Diretos</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 12px;">
+                            <span style="color: var(--divercidade-text-muted); font-size: 13px;">Tamara</span>
+                        </li>
+                        <li style="margin-bottom: 12px;">
+                            <span style="color: var(--divercidade-text-muted); font-size: 13px;">Pedro</span>
+                        </li>
+                        <li>
+                            <span style="color: var(--divercidade-text-muted); font-size: 13px;">Geral</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Phone Numbers -->
+                <div>
+                    <h4
+                        style="font-size: 14px; font-weight: 700; color: var(--divercidade-text); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px;">
+                        Telefone</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 12px;">
+                            <span style="color: var(--divercidade-text-muted); font-size: 13px;">+55 19 920 010
+                                580</span>
+                        </li>
+                        <li style="margin-bottom: 12px;">
+                            <span style="color: var(--divercidade-text-muted); font-size: 13px;">+55 19
+                                98979-7970</span>
+                        </li>
+                        <li>
+                            <span style="color: var(--divercidade-text-muted); font-size: 13px;">+55 19
+                                99883-7282</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Social Media -->
+                <div>
+                    <h4
+                        style="font-size: 14px; font-weight: 700; color: var(--divercidade-text); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px;">
+                        Siga-nos</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 12px;">
+                            <a href="#"
+                                style="color: var(--divercidade-text-muted); text-decoration: none; font-size: 13px; display: flex; align-items: center; gap: 8px; transition: 0.3s;">
+                                <i class="fab fa-instagram"></i> Instagram
+                            </a>
+                        </li>
+                        <li style="margin-bottom: 12px;">
+                            <a href="#"
+                                style="color: var(--divercidade-text-muted); text-decoration: none; font-size: 13px; display: flex; align-items: center; gap: 8px; transition: 0.3s;">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                style="color: var(--divercidade-text-muted); text-decoration: none; font-size: 13px; display: flex; align-items: center; gap: 8px; transition: 0.3s;">
+                                <i class="fas fa-globe"></i> Website
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div
+                style="border-top: 1px solid var(--divercidade-border); padding-top: 30px; text-align: center; color: var(--divercidade-text-muted); font-size: 12px; opacity: 0.7;">
+                &copy; 2026 DiverCidade Hub. Todos os direitos reservados. Proposta confidencial para Klabin S.A.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Investment Calculator Logic ---
+        const Calculator = {
+            prices: {
+                training: 15000,
+                women: 800,
+                pcd: 750,
+                climate: 12000
+            },
+            fixedTotal: 220000,
+            counts: {
+                training: 0,
+                women: 0,
+                pcd: 0,
+                climate: 0
+            },
+
+            init() {
+                this.updateUI();
+                this.bindEvents();
+            },
+
+            bindEvents() {
+                document.querySelectorAll('.module-card[data-module]').forEach(card => {
+                    const type = card.dataset.module;
+                    const step = parseInt(card.querySelector('button').dataset.step) || 1;
+
+                    card.querySelector('.minus').onclick = () => {
+                        if (this.counts[type] >= step) {
+                            this.counts[type] -= step;
+                            this.updateUI();
+                        }
+                    };
+
+                    card.querySelector('.plus').onclick = () => {
+                        this.counts[type] += step;
+                        this.updateUI();
+                    };
+                });
+            },
+
+            updateUI() {
+                for (let key in this.counts) {
+                    const el = document.querySelector(`.module-card[data-module="${key}"] .module-count`);
+                    if (el) el.textContent = this.counts[key];
+                }
+
+                let variableTotal =
+                    (this.counts.training * this.prices.training) +
+                    (this.counts.women * this.prices.women) +
+                    (this.counts.pcd * this.prices.pcd) +
+                    (this.counts.climate * this.prices.climate);
+
+                let grandTotal = this.fixedTotal + variableTotal;
+
+                document.getElementById('variable-display').textContent = this.formatMoney(variableTotal);
+                document.getElementById('grand-total').textContent = this.formatMoney(grandTotal);
+
+                // Update Payment Terms Breakdown
+                document.getElementById('pay-signal').textContent = this.formatMoney(grandTotal * 0.30);
+                document.getElementById('pay-mid').textContent = this.formatMoney(grandTotal * 0.40);
+                document.getElementById('pay-end').textContent = this.formatMoney(grandTotal * 0.30);
+            },
+
+            formatMoney(val) {
+                return val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            }
+        };
+
+        // Initialize calculator
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                Calculator.init();
+            });
+        } else {
+            Calculator.init();
+        }
+    </script>
+    <script>
+        const toggleBtn = document.getElementById('theme-toggle');
+        const icon = toggleBtn.querySelector('i');
+        const body = document.body;
+
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDark = body.classList.contains('dark-mode');
+
+            if (isDark) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    </script>
+</body>
+
+</html>
